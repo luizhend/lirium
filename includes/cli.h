@@ -28,11 +28,11 @@ typedef struct token{
 } token_t;
 
 typedef struct {
-    const char *name;
+    char *name;
     token_type type;
 } Keyword;
 
 
 
 
-void lex(const char *buffer);
+void lex(char *buffer);
