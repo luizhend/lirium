@@ -7,11 +7,14 @@
 #include <stddef.h>
 #include <string.h>
 
-network_t* create_network(){
+network_t* create_network(uint8_t id, char *label, uint8_t label_len){
     printf("[LIRIUM NETWORK] Creating new network\n");
     network_t* network = (network_t*)malloc(sizeof(network_t));
+    network->id = id;
     network->devices = NULL;
     network->devices_len = 0;
+    network->label = label;
+    network->label_len = label_len;;
     return network;
 }
 

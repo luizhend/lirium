@@ -7,7 +7,8 @@ srcfiles = [
     'src/network/packet.c',
     'src/network/interface.c',
     'src/cli/cli.c',
-    'src/cli/lexer.c'
+    'src/cli/lexer.c',
+    'src/cli/parser.c'
 ]
 
 

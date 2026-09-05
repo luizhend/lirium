@@ -4,26 +4,13 @@
 #include <string.h>
 #define NEXT_CHAR(buffer, c, idx) c = buffer[++idx]
 
-static const Keyword keywords[] = {
-    {"network", TOK_NETWORK},
-    {"select", TOK_SELECT},
-    {"node", TOK_NODE},
-    {"interface", TOK_INTERFACE},
-    {"mac", TOK_MAC},
-    {"ip", TOK_IP},
-    {"protocol", TOK_PROTOCOL},
-    {"connect", TOK_CONNECT},
-    {"create", TOK_CREATE},
-    {"packet", TOK_PACKET_SEND},
-    {"header", TOK_PACKET_HEADER_TYPE},
-};
+token_t* tokens[128];
 
 int get_keyword(char *word, int len){
     for(int i = 0; i < *(&keywords + 1) - keywords;i++){
 
-        printf("[LIRIUM CLI] Comparing %.*s, to keyword %s\n", len + 1 , word, keywords[i].name);
         if(strncmp(word, keywords[i].name, len) == 0){
-            printf("[LIRIUM CLI] Find keyword %s\n", keywords[i].name);
+            printf("[LIRIUM CLI] Found keyword %s\n", keywords[i].name);
             return keywords[i].type;
         }
     }
@@ -36,12 +23,12 @@ token_t* create_token(token_type type, char *start, int length){
     token->type = type;
     token->length = length;
     token->start = start;
+
     return token;
 }
 
-int step(char *buffer, int *idx) {
+int step(char *buffer, int *idx, int *tk_idx) {
     char c = buffer[*idx];
-
     switch (c) {
         case '\0':
             return 0;
@@ -62,7 +49,9 @@ int step(char *buffer, int *idx) {
 
             char *word = buffer + start;
             int kw = (int)get_keyword(word, *idx - 1 - start);
-            create_token((kw > 0 ? kw : TOK_IDENTIFIER), &buffer[start], start);
+            token_t* token = create_token((kw > 0 ? kw : TOK_IDENTIFIER), &buffer[start], *idx - start);
+            tokens[*tk_idx] = token;
+            *tk_idx += 1;
             break;
             }
         case '"':{
@@ -73,7 +62,9 @@ int step(char *buffer, int *idx) {
             }
             char *literal = buffer + start;
             NEXT_CHAR(buffer, c, *idx);
-            create_token(TOK_STRING, literal, *idx - start - 1);
+            token_t* token = create_token(TOK_STRING, literal, *idx - start);
+            tokens[*tk_idx] = token;
+            *tk_idx += 1;
             break;
         }
 
@@ -85,12 +76,19 @@ int step(char *buffer, int *idx) {
     return 1;
 }
 
-
-
 void lex(char *buffer) {
     int i = 0;
+    int tk_idx=0;
+    while (step(buffer, &i, &tk_idx) != 0) {
 
-    while (step(buffer, &i) != 0) {
         ;
     }
+
+
+    parse(buffer, tokens, tk_idx);
+
+    tk_idx = 0;;
+
+    memset(tokens, 0, 128);
+
 }

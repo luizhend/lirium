@@ -15,9 +15,10 @@ typedef enum {
     TOK_CREATE,
     TOK_PACKET_SEND,
     TOK_PACKET_HEADER_TYPE,
-
+    TOK_SHOW,
     TOK_EOF
 } token_type;
+
 
 
 
@@ -32,7 +33,21 @@ typedef struct {
     token_type type;
 } Keyword;
 
-
+static const Keyword keywords[] = {
+    {"network", TOK_NETWORK},
+    {"select", TOK_SELECT},
+    {"node", TOK_NODE},
+    {"interface", TOK_INTERFACE},
+    {"mac", TOK_MAC},
+    {"ip", TOK_IP},
+    {"protocol", TOK_PROTOCOL},
+    {"connect", TOK_CONNECT},
+    {"show", TOK_SHOW},
+    {"create", TOK_CREATE},
+    {"packet", TOK_PACKET_SEND},
+    {"header", TOK_PACKET_HEADER_TYPE},
+};
 
 
 void lex(char *buffer);
+void *parse(char*, token_t**, int);
