@@ -5,12 +5,13 @@
 #include <stdint.h>
 #include <stdio.h>
 
-node_t* create_node(size_t identifier){
+node_t* create_node(size_t identifier, char *hostname, uint8_t hostname_len){
     printf("[LIRIUM NODE] Creating node with identifier %ld\n\n", identifier);
     node_t* node = (node_t*)malloc(sizeof(node_t));
     node->interfaces_count = 1;
     node->id = identifier;
-
+    node->hostname = hostname;
+    node->hostname_len = hostname_len;
     node->interfaces = (network_interface_t**)malloc(sizeof(*node->interfaces));
     network_interface_t* interface = create_interface(identifier);
     node->interfaces[0] = interface;

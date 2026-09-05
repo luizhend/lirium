@@ -7,7 +7,7 @@
 network_t* networks[128];
 node_t* nodes[128];
 uint8_t nodes_len=0;
-uint8_t networks_len = 1;
+uint8_t networks_len = 0;
 
 int main(void){
 

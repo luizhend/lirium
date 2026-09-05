@@ -50,4 +50,4 @@ static const Keyword keywords[] = {
 
 
 void lex(char *buffer);
-void *parse(char*, token_t**, int);
+void parse(char*, token_t**, int);
