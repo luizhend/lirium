@@ -66,14 +66,15 @@ int step(char *buffer, int *idx) {
             break;
             }
         case '"':{
-            int start = *idx;
             NEXT_CHAR(buffer, c, *idx);
+            int start = *idx;
             while (c != '"') {
                 NEXT_CHAR(buffer, c, *idx);
             }
             char *literal = buffer + start;
             NEXT_CHAR(buffer, c, *idx);
-            create_token(TOK_STRING, literal, *idx - start);
+            create_token(TOK_STRING, literal, *idx - start - 1);
+            break;
         }
 
         default:
