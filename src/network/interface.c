@@ -1,5 +1,6 @@
 #include "../includes/interface.h"
 #include "network.h"
+#include "node.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,4 +35,30 @@ void interface_send_packet(packet_t* packet, network_interface_t* interface){
             packet->type);
 
     network_route_packet(interface->network, packet);
+}
+
+void interface_receive_packet(packet_t* packet, network_interface_t* interface){
+    switch (packet->type) {
+        case HEADER_IP:{
+            packet_ip_header_t* header = packet->header;
+            char* payload = (char*)malloc(header->payload_len);
+            payload = packet->payload;
+            printf("[LIRIUM INTERFACE] Interface identified by MAC %02X:%02X:%02X:%02X:%02X:%02X\n\tReceived package From %d.%d.%d.%d\n\tPayload: %s\n\n",
+                interface->mac_addr[0],
+                interface->mac_addr[1],
+                interface->mac_addr[2],
+                interface->mac_addr[3],
+                interface->mac_addr[4],
+                interface->mac_addr[5],
+                header->src[0],
+                header->src[1],
+                header->src[2],
+                header->src[3],
+                payload
+            );
+            break;
+            }
+        default:
+            break;
+    }
 }

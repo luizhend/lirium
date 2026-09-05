@@ -20,7 +20,7 @@ int main(void){
     set_static_ip(ip, node->interfaces[0]);
     set_static_ip(ip_b, node_b->interfaces[0]);
 
-    char* payload = "oi pessoal";
+    char* payload = "oi pessoal\nsaibam que eu sou um payload muito legal e divertido yeye uhul vamos la";
     uint8_t destination[] = {0, 0, 0, 0};
     uint8_t source[] = {0, 0, 0, 0};
     memcpy(source, node->interfaces[0]->ip_addr, sizeof(source));

@@ -11,3 +11,4 @@ typedef struct network_interface {
 
 void interface_send_packet(packet_t*, network_interface_t*);
 network_interface_t* create_interface(size_t);
+void interface_receive_packet(packet_t*, network_interface_t*);

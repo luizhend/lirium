@@ -90,6 +90,7 @@ void network_route_packet(network_t* network,packet_t* packet){
                  header->dst[2],
                  header->dst[3]
              );
+             interface_receive_packet(packet, dst_interface);
              break;
             }
         default:
