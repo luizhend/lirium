@@ -3,9 +3,18 @@
 #include <string.h>
 #include "../includes/network.h"
 #include "../includes/interface.h"
+#include "../includes/cli.h"
 #include "node.h"
 
 int main(void){
+
+    char input[1024];
+
+    while (1) {
+        printf("lirium> ");
+        fgets(input, sizeof(input), stdin);
+        lex(input);
+    }
 
     network_t* network = create_network();
 
