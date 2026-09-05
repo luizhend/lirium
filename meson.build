@@ -4,7 +4,8 @@ srcfiles = [
     'src/main.c',
     'src/network/network.c',
     'src/network/node.c',
-    'src/network/packet.c'
+    'src/network/packet.c',
+    'src/network/interface.c'
 
 ]
 
