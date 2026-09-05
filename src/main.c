@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 #include "../includes/network.h"
 
 int main(void){
@@ -16,6 +17,13 @@ int main(void){
         node->interfaces[0]->ip_addr[1],
         node->interfaces[0]->ip_addr[2],
         node->interfaces[0]->ip_addr[3]);
+    char* payload = "oi pessoal";
+    uint8_t destination[] = {0, 0, 0, 0};
+    uint8_t source[] = {0, 0, 0, 0};
+    memcpy(source, node->interfaces[0]->ip_addr, sizeof(source));
+    send_packet(payload, strlen(payload), destination, source, HEADER_IP, node);
+
+
     printf("[LIRIUM NETWORK] Process completed\n");
     return 0;
 }

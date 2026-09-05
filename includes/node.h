@@ -1,3 +1,4 @@
+#include "packet.h"
 #include <stdint.h>
 #include <stddef.h>
 
@@ -15,3 +16,4 @@ typedef struct node {
 
 
 node_t* create_node(size_t);
+void send_packet(void* payload, size_t payload_len,uint8_t dst[4],  uint8_t src[4], packet_header_type type,node_t* node);
