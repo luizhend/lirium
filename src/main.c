@@ -18,7 +18,7 @@ int main(void){
         printf("lirium> ");
         fgets(input, sizeof(input), stdin);
         lex(input);
-
+        memset(input, 0, sizeof(input));
     }
 
     return 0;

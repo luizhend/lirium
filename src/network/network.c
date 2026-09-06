@@ -13,7 +13,8 @@ network_t* create_network(uint8_t id, char *label, uint8_t label_len){
     network->id = id;
     network->devices = NULL;
     network->devices_len = 0;
-    network->label = label;
+    network->label = (char*)malloc(sizeof(char*) * label_len);
+    strncpy(network->label, label, label_len);
 
     network->label_len = label_len;
     return network;
