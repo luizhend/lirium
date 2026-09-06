@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 #include "../includes/network.h"
 #include "../includes/cli.h"
 #include "node.h"
@@ -17,6 +18,7 @@ int main(void){
         printf("lirium> ");
         fgets(input, sizeof(input), stdin);
         lex(input);
+
     }
 
     return 0;

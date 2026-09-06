@@ -4,20 +4,21 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 node_t* create_node(size_t identifier, char *hostname, uint8_t hostname_len){
-    printf("[LIRIUM NODE] Creating node with identifier %ld\n\n", identifier);
+    printf("[LIRIUM NODE] Creating node with identifier %ld\nHostname: %s\n\n", identifier, hostname);
     node_t* node = (node_t*)malloc(sizeof(node_t));
     node->interfaces_count = 1;
     node->id = identifier;
-    node->hostname = hostname;
+    node->hostname = (char*)malloc(sizeof(char*) * hostname_len);
+    strncpy(node->hostname, hostname, hostname_len);
     node->hostname_len = hostname_len;
     node->interfaces = (network_interface_t**)malloc(sizeof(*node->interfaces));
     network_interface_t* interface = create_interface(identifier);
     node->interfaces[0] = interface;
     return node;
 }
-
 
 void node_send_packet(void* payload, size_t payload_len,uint8_t *dst,  uint8_t *src, packet_header_type type,node_t* node){
     printf(

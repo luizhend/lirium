@@ -46,9 +46,8 @@ int step(char *buffer, int *idx, int *tk_idx) {
             while ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_') {
                 NEXT_CHAR(buffer, c, *idx);
             }
-
             char *word = buffer + start;
-            int kw = (int)get_keyword(word, *idx - 1 - start);
+            int kw = (int)get_keyword(word, *idx - start);
             token_t* token = create_token((kw > 0 ? kw : TOK_IDENTIFIER), &buffer[start], *idx - start);
             tokens[*tk_idx] = token;
             *tk_idx += 1;
@@ -87,8 +86,8 @@ void lex(char *buffer) {
 
     parse(buffer, tokens, tk_idx);
 
-    tk_idx = 0;;
+    tk_idx = 0;
 
-    memset(tokens, 0, 128);
+    memset(tokens, 0, sizeof(tokens));
 
 }

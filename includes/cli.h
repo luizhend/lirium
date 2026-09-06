@@ -3,7 +3,6 @@ typedef enum {
     TOK_STRING,
     TOK_NUMBER,
     TOK_IDENTIFIER,
-
     TOK_NETWORK,
     TOK_SELECT,
     TOK_NODE,
@@ -18,9 +17,6 @@ typedef enum {
     TOK_SHOW,
     TOK_EOF
 } token_type;
-
-
-
 
 typedef struct token{
     token_type type;

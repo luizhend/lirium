@@ -14,7 +14,8 @@ network_t* create_network(uint8_t id, char *label, uint8_t label_len){
     network->devices = NULL;
     network->devices_len = 0;
     network->label = label;
-    network->label_len = label_len;;
+
+    network->label_len = label_len;
     return network;
 }
 
